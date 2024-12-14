@@ -1,6 +1,6 @@
 import time
 
-dict_nosha = {
+dict_shano = {
     # Special Characters
     '\0': '101', '\v': '103', '\f': '107', '\b': '109', '\t': '113',
     '\r': '127', '\n': '131', '\\': '137', '\"': '139', '\'': '149',
@@ -34,7 +34,7 @@ dict_nosha = {
     '>': '683', ',': '691', '.': '701', '?': '709', ' ': '727'
 }
 
-list_nosha = [
+list_shano = [
   '101', '103', '107', '109', '113', '127', '131', '137', '139', '149',
   '151', '157', '163', '167', '173', '179', '181', '191', '193', '197',
   '199', '211', '223', '227', '229', '233', '239', '241', '251', '257',
@@ -55,7 +55,7 @@ def implode(data):
     countdata = len(data)
     while loop < countdata:
         procces = data[loop]
-        result += int(dict_nosha[procces])
+        result += int(dict_shano[procces])
         loop += 1
         
     return loop, result
@@ -70,7 +70,7 @@ def explode(data):
     node = int(data[:data.find('x')]) 
     total= int(data[data.find('x') + 1:]) 
     nodes = [total] * node
-    list_nosha = list(map(int, list_nosha))
+    list_shano = list(map(int, list_shano))
     
     while sum(nodes) != 0:
         for i in nodes:
