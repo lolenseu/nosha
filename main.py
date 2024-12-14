@@ -49,31 +49,70 @@ list_shano = [
 ]
 
 
-def implode(data):
+def implode(data, tuple_result = False):
+    value = 0
+    hash = 0
     result = 0
     loop = 0
     countdata = len(data)
+    
     while loop < countdata:
         procces = data[loop]
+        value += int(dict_shano[procces])
+        hash += int(dict_shano[procces]) + result
         result += int(dict_shano[procces])
         loop += 1
         
-    return loop, result
-
-
-imploded = implode('09')
-value = f'{imploded[0]}x{imploded[1]}'
-#print(value)
+    if tuple_result == True:
+        return loop, value, hex(hash)
+    
+    else:
+        return f'n{loop}v{value}h{hex(hash)}'
 
 
 def explode(data):
-    node = int(data[:data.find('x')]) 
-    total= int(data[data.find('x') + 1:]) 
-    nodes = [total] * node
-    list_shano = list(map(int, list_shano))
+    node = int(data[data.find('n') + 1:data.find('v')]) 
+    value = int(data[data.find('v') + 1:data.find('h')])
+    hash = str(data[data.find('h') + 1:])
+    nodes = [value] * node
+    shano = list(map(int, list_shano))
     
-    while sum(nodes) != 0:
-        for i in nodes:
-            print(sum(nodes))
+    print(node)
+    print(value)
+    print(hash)
+    
+    pnode = [[]for _ in nodes]
+    index = 0
+    
+    for i in nodes:
+        for a in shano:
+            pnode[index].append(i - a)
+        
+        index += 1
+        
+        
+    pindex = 0
+    result = 0
+    for a in pnode[0]:
+        for b in pnode[1]:
+            c = a + b
+            d = a * 2 - result
+            result = c
+            
+            if c != 0:
+                result = 0
+            
+            if c == 0 and hex(d) == hash:
+                print(f"ok {a} {b}")
+            
+                
+    #print(pnode)
 
-explode('2x348')
+
+
+
+
+print(implode('1001'))
+print(implode('1010'))
+print(implode('1100'))
+explode(implode('1001'))
